@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class Books extends ResourceCollection
+class Categories extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -16,8 +16,8 @@ class Books extends ResourceCollection
     {
         // return parent::toArray($request);
         return [
-            'status' => 'success',
-            'message' => 'books Data',
+            'status' => 'succes',
+            'message' => 'categories Data',
             'data' => parent::toArray($request)
         ];
     }
