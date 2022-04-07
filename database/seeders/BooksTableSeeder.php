@@ -6,6 +6,8 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class BooksTableSeeder extends Seeder
 {
@@ -67,16 +69,19 @@ class BooksTableSeeder extends Seeder
             $title = str_replace('.', '', $title);
             $slug = str_replace(' ', '-', strtolower($title));
             $category = $image_categories[mt_rand(0, 8)];
-            $cover_path = 'public/images/books';
-            $cover_fullpath = $faker->image( $cover_path, 300, 500, $category, true, true, $category);
-            $cover = str_replace($cover_path . '/' , '', $cover_fullpath);
+            // $cover_path = 'public/images/books';
+            // $cover_fullpath = $faker->image( $cover_path, 300, 500, $category, true, true, $category);
+            // $cover = str_replace($cover_path . '/' , '', $cover_fullpath);
+
+            // $img = $faker->image( 'public/images/books', 300, 500, $category, true, true, $category);
+            // $cover = Storage::disk('public')->put('images/books/'.$img, 'public');
             $books[$i] = [
                 'title' => $title,
                 'slug' => $slug,
                 'description' => $faker->text(255),
                 'author' => $faker->name,
                 'publisher' => $faker->company,
-                'cover' => $cover,
+                'cover' => $faker->imageUrl(300, 500, $category, true, true, $category),
                 'price' => mt_rand(1, 10) * 50000,
                 'weight' => 0.5,
                 'status' => 'PUBLISH',

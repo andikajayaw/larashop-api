@@ -6,6 +6,8 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class CategoriesTableSeeder extends Seeder
 {
@@ -25,15 +27,18 @@ class CategoriesTableSeeder extends Seeder
             $name = str_replace('.', '', $name);
             $slug = str_replace(' ', '-', strtolower($name));
             $category = $image_categories[mt_rand(0, 8)];
-            $image_path = 'public/images/categories';
-            $image_fullpath = $faker->image( $image_path, 500, 300, $category, true, true, $category);
-            // $image = str_replace($image_path . '/' , '', $image_fullpath);
-            $image = storage_path().$image_fullpath;
-            // $cover = $cover->store('book-covers', 'public');
+            // $image_path = 'public/images/categories';
+            // $image_fullpath = $faker->image( $image_path, 500, 300, $category, true, true, $category);
+            // // $image = str_replace($image_path . '/' , '', $image_fullpath);
+            // $image = storage_path().$image_fullpath;
+            // // $cover = $cover->store('book-covers', 'public');
+
+            // $img = $faker->image( 'public/images/categories', 500, 300, $category, true, true, $category);
+            // $image = Storage::disk('public')->put('images/categories/'.$img, 'public');
             $categories[$i] = [
                 'name' => $name,
                 'slug' => $slug,
-                'image' => $image,
+                'image' => $faker->imageUrl(500, 300, $category, true, true, $category),
                 'status' => 'PUBLISH',
                 'created_at' => Carbon::now(),
             ];
