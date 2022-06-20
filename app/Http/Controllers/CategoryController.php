@@ -4,13 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
-use App\Http\Resources\Categories as CategoryResourceCollection;
+use App\Http\Resources\Categories as CategoriesResourceCollection;
+use App\Http\Resources\Category as CategoryResourceCollection;
 
 class CategoryController extends Controller
 {
     public function random($count)
     {
         $criteria = Category::select('*')->inRandomOrder()->limit($count)->get();
+        return new CategoriesResourceCollection($criteria);
+    }
+
+    public function slug($slug)
+    {
+        $criteria = Category::where('slug', $slug)->first();
         return new CategoryResourceCollection($criteria);
     }
 
@@ -21,7 +28,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $criteria = Category::paginate(6);
+        return new CategoriesResourceCollection($criteria);
     }
 
     /**

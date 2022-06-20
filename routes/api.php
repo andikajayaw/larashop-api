@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AuthController;
 use App\Models\Book;
 use App\Http\Resources\Book as BookResource;
+use App\Http\Resources\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,9 @@ Route::prefix('v1')->group(function () {
     // Route::post('logout', [AuthController::class, 'logout']);
 
     Route::get('categories/random/{count}', [CategoryController::class, 'random']);
+    Route::get('categories', [CategoryController::class, 'index']);
+
+
     Route::get('books/top/{count}', [BookController::class, 'top']);
 
     //private logout
