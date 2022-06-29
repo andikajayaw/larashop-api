@@ -15,7 +15,7 @@ class CreateBookCategoryTable extends Migration
     {
         Schema::create('book_category', function (Blueprint $table) {
             $table->id();
-            $table->integer('bookd_id');
+            $table->integer('book_id');
             $table->integer('category_id');
             $table->timestamps();
         });

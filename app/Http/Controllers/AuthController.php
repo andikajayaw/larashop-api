@@ -17,7 +17,7 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        $user = User::where('email', '=', $request->email)->firstOrFail();
+        $user = User::where('email', '=', $request->email)->first();
         $status = "error";
         $message = "";
         $data = null;
